@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cowork-cli"
+version = "1.0.0"
+description = "The harness for the Cowork Companion office models: envelope validation, constrained decode, exact --compute arithmetic, Office artifact rendering, and the Tabula fact sidecar"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Chad St. Thomas" }]
+keywords = ["office", "agent", "llama.cpp", "gguf", "on-device",
+            "small-models", "structured-output", "tablinum"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Office/Business",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Models = "https://huggingface.co/tablinum/cowork-companion"
+Dataset = "https://huggingface.co/datasets/tablinum/cowork-companion-sft"
+Organization = "https://huggingface.co/tablinum"
+
+[project.optional-dependencies]
+office = ["python-docx", "openpyxl", "python-pptx", "pypdf"]
+engram = ["torch", "transformers", "sentence-transformers",
+          "huggingface_hub"]
+mcp = ["mcp"]
+all = ["python-docx", "openpyxl", "python-pptx", "pypdf", "torch",
+       "transformers", "sentence-transformers", "huggingface_hub", "mcp"]
+
+[project.scripts]
+cowork = "curiousgene.product.cowork_cli:main"
+cowork-mcp = "curiousgene.product.mcp_server:main"
+cowork-serve = "curiousgene.product.serve:main"
+
+[tool.setuptools.packages.find]
+include = ["curiousgene*"]
+
+[tool.setuptools.package-data]
+curiousgene = ["data/example_fact_base.jsonl"]

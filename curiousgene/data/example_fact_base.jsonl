@@ -1,0 +1,6 @@
+{"id": "ex-001", "fact": "The standard meeting room capacity at Contoso is 12 people.", "for": "meeting-room questions"}
+{"id": "ex-002", "fact": "Expense reports must be submitted within 30 days of the purchase date.", "for": "expense-policy questions"}
+{"id": "ex-003", "fact": "The Q3 travel budget is 15,834.36 in the approved plan.", "for": "budget-total questions"}
+{"id": "ex-004", "fact": "Guest Wi-Fi access expires after 8 hours.", "for": "guest-network questions"}
+{"id": "ex-005", "fact": "The facilities helpdesk answers tickets within 2 business days.", "for": "helpdesk-sla questions"}
+{"id": "ex-006", "fact": "Laptops are refreshed every 4 years for full-time employees.", "for": "hardware-refresh questions"}
