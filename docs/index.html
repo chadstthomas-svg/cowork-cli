@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cowork-cli — behavior in the weights, facts in the tables</title>
+<meta name="description" content="The deployment harness that makes a 354M model a usable office coworker, and the paper behind it: The Dose-Window Hypothesis.">
+<meta name="author" content="Chad St Thomas">
+<style>
+:root{
+  --ink:#1F2933; --muted:#64748B; --rule:#E2E8F0; --panel:#F8FAFC;
+  --accent:#1E3A8A; --good:#0F766E;
+  --serif:'Iowan Old Style','Palatino Linotype',Georgia,serif;
+  --sans:Inter,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); font-family:var(--sans);
+  font-size:16.5px; line-height:1.65;
+}
+.wrap{max-width:46rem; margin:0 auto; padding:0 24px}
+header.top{
+  border-bottom:2px solid var(--ink); padding:64px 0 28px; margin-bottom:40px;
+}
+.kicker{
+  font-family:var(--mono); font-size:.68rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 18px;
+}
+h1{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(1.8rem,4.8vw,2.6rem); line-height:1.14;
+  letter-spacing:-.012em; margin:0 0 16px;
+}
+.dek{color:var(--muted); font-size:1.08rem; max-width:36rem; margin:0}
+.author{
+  font-size:.95rem; margin:20px 0 0; font-weight:600;
+}
+.author span{font-weight:400; color:var(--muted)}
+
+section{margin:0 0 44px}
+h2{
+  font-family:var(--serif); font-size:1.35rem; font-weight:600;
+  margin:0 0 14px; letter-spacing:-.008em;
+}
+p{margin:0 0 1rem}
+a{color:var(--accent)}
+
+.paper-card{
+  display:block; text-decoration:none; color:inherit;
+  border:1px solid var(--rule); border-left:3px solid var(--good);
+  border-radius:8px; padding:24px 26px; background:var(--panel);
+  transition:border-color .15s;
+}
+.paper-card:hover{border-color:var(--good)}
+.paper-card .t{
+  font-family:var(--serif); font-size:1.22rem; font-weight:600;
+  margin-bottom:6px;
+}
+.paper-card .s{color:var(--muted); font-size:.95rem}
+.paper-card ul{
+  list-style:none; margin:16px 0 0; padding:0;
+  display:grid; gap:8px; font-size:.92rem;
+}
+.paper-card li{display:grid; grid-template-columns:20px 1fr; gap:10px}
+.paper-card li b{color:var(--good); font-family:var(--mono); font-size:.8rem}
+.paper-card li span b{color:inherit; font-family:inherit; font-size:inherit}
+
+pre{
+  background:var(--panel); border:1px solid var(--rule); border-radius:8px;
+  padding:16px 18px; overflow-x:auto; font-size:.85rem; line-height:1.6;
+  font-family:var(--mono);
+}
+.links{
+  display:flex; flex-wrap:wrap; gap:10px 26px; font-size:.95rem;
+  font-family:var(--mono); padding:0; margin:0; list-style:none;
+}
+.links a{text-decoration:none; border-bottom:1px solid var(--rule)}
+.links a:hover{border-color:var(--accent)}
+
+footer{
+  border-top:1px solid var(--rule); margin-top:52px; padding:22px 0 48px;
+  font-size:.8rem; color:var(--muted); display:flex;
+  justify-content:space-between; gap:1rem; flex-wrap:wrap;
+}
+footer .mark{font-family:var(--mono); letter-spacing:.2em; color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">Tablinum &nbsp;·&nbsp; cowork-cli</p>
+  <h1>Behavior in the weights, facts in the tables, arithmetic in the harness.</h1>
+  <p class="dek">The deployment harness that makes a 354M model a usable office
+  coworker — and the measured research behind it.</p>
+  <p class="author">Chad St Thomas <span>· CuriousGene / Tablinum</span></p>
+</header>
+
+<section>
+  <a class="paper-card" href="paper.html">
+    <div class="t">The Dose-Window Hypothesis</div>
+    <div class="s">Order, calibration, and externalised knowledge in small
+    language models — a hypothesis with measured corollaries. Read the paper
+    →</div>
+    <ul>
+      <li><b>01</b><span><b>Order beats ingredients.</b> The same training
+      data cost 0.081 mixed in and gained 0.016 as a pulse followed by a
+      re-lock, at identical compute.</span></li>
+      <li><b>02</b><span><b>Calibration, not bits.</b> Two 2-bit builds of one
+      model, identical in size and bit width, scored 0.014 and 0.708.</span></li>
+      <li><b>03</b><span><b>Knowledge divides cleanly.</b> A runtime-editable
+      fact table supplies the content half; judgment stays in the weights.</span></li>
+      <li><b>04</b><span><b>Interfaces leak.</b> A retrieval tool scored
+      0.510–0.633 against 0.939 for retrieving before inference.</span></li>
+    </ul>
+  </a>
+</section>
+
+<section>
+  <h2>Quick start</h2>
+<pre>pip install ".[office,engram]"
+
+cowork --gguf cowork-companion-350M-Q8_0.gguf \
+       --files budget.csv --compute \
+       --instruction "What is the total travel spend for attendees with RSVP status Yes?"</pre>
+  <p style="font-size:.92rem;color:var(--muted)">Requires
+  <a href="https://github.com/ggml-org/llama.cpp">llama-server</a> on PATH and a
+  model rung — Q8_0 is the measured recommendation. The CLI computes arithmetic
+  deterministically, constrains decoding to the envelope schema, and renders
+  real .pptx/.xlsx/.docx artifacts.</p>
+</section>
+
+<section>
+  <h2>Elsewhere</h2>
+  <ul class="links">
+    <li><a href="https://github.com/chadstthomas-svg/cowork-cli">code</a></li>
+    <li><a href="https://huggingface.co/tablinum/cowork-companion">model · 354M</a></li>
+    <li><a href="https://huggingface.co/tablinum/cowork-companion-1.2b">model · 1.2B</a></li>
+    <li><a href="https://huggingface.co/datasets/tablinum/cowork-companion-sft">dataset</a></li>
+    <li><a href="paper.html">the paper</a></li>
+  </ul>
+</section>
+
+<footer>
+  <span>Every number on this site recomputes from a committed run record.</span>
+  <span class="mark">TABLINUM</span>
+</footer>
+
+</div>
+</body>
+</html>
